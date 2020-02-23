@@ -1,0 +1,20 @@
+FROM debian:buster
+MAINTAINER Suwat Saisema (suwat_sai@hotmail.com)
+
+ENV DEBIAN_FRONTEND noninteractive
+ENV APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=DontWarn
+
+RUN apt-get update && apt-get install -yq --no-install-recommends \
+    libpcre3-dev \
+    libc-ares2 \
+    libjson-c3 \
+    libreadline7 \
+    procps \
+    frr \
+    frr-pythontools \
+&& rm -rf /var/lib/apt/lists/*
+
+ADD docker-start /usr/sbin/docker-start
+RUN chmod +x /usr/sbin/docker-start
+
+ENTRYPOINT ["/usr/sbin/docker-start"]
