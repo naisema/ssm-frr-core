@@ -1,3 +1,3 @@
 #!/bin/bash
-docker run -itd --privileged --name frr-core frrouting
+docker run --net=voip -itd --name=frr-core frrouting
 
